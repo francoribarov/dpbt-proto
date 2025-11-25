@@ -103,16 +103,15 @@ export const FollowUp = () => {
                 Programado: {new Date(check.scheduledAt).toLocaleString('es-UY')}
               </div>
               <div className="mt-3 text-sm font-semibold text-gray-800">¿Cómo sigue tu perro?</div>
-              <div className="mt-2 flex flex-wrap gap-2">
+              <div className="mt-2 grid grid-cols-1 gap-2 sm:grid-cols-3">
                 {(['mejor', 'igual', 'peor'] as const).map((option) => (
                   <button
                     key={option}
                     onClick={() => handleOutcome(check, option)}
-                    className={`rounded-full px-4 py-2 text-sm min-h-[44px] transition ${
-                      check.outcome === option
+                    className={`rounded-full px-4 py-2 text-sm min-h-[44px] transition w-full ${check.outcome === option
                         ? 'border border-teal-600 bg-[#e3f1f2] text-gray-900'
                         : 'border border-dashed border-gray-300 bg-white text-gray-700 hover:border-gray-400'
-                    }`}
+                      }`}
                   >
                     {option === 'mejor' ? 'Mejor' : option === 'igual' ? 'Igual' : 'Peor'}
                   </button>
@@ -135,7 +134,10 @@ export const FollowUp = () => {
       </Card>
 
       <div className="flex justify-end">
-        <SecondaryButton onClick={() => navigate('/historial')}>
+        <SecondaryButton
+          onClick={() => navigate('/historial')}
+          className="w-full sm:w-auto"
+        >
           <ArrowLeft className="h-4 w-4" />
           Volver al historial
         </SecondaryButton>

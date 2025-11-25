@@ -33,7 +33,7 @@ export const SymptomSelect = () => {
         title="Preconsulta"
         subtitle="¿Qué síntoma tiene tu perro?"
         right={
-          <SecondaryButton onClick={onNew} className="text-sm">
+          <SecondaryButton onClick={onNew} className="w-full text-sm sm:w-auto">
             Iniciar borrador nuevo
           </SecondaryButton>
         }
@@ -53,7 +53,7 @@ export const SymptomSelect = () => {
         </span>
       </div>
 
-      <div className="grid grid-cols-2 gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {filtered.map((item) => (
           <CardOption
             key={item.key}
@@ -70,7 +70,11 @@ export const SymptomSelect = () => {
       </div>
 
       <div className="flex justify-end">
-        <PrimaryButton onClick={onContinue} disabled={!draft.symptom}>
+        <PrimaryButton
+          onClick={onContinue}
+          disabled={!draft.symptom}
+          className="w-full sm:w-auto"
+        >
           Continuar
         </PrimaryButton>
       </div>

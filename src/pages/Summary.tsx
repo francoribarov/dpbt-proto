@@ -82,7 +82,7 @@ export const Summary = () => {
   )
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 pb-32 sm:pb-0">
       <AppBar
         step="Paso 5"
         title="Resumen clínico"
@@ -104,12 +104,12 @@ export const Summary = () => {
           {summaryText}
         </pre>
 
-        <div className="flex flex-wrap gap-2">
-          <SecondaryButton onClick={handleCopy}>
+        <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap">
+          <SecondaryButton onClick={handleCopy} className="w-full sm:w-auto">
             <Clipboard className="h-4 w-4" />
             {copied ? 'Copiado' : 'Copiar resumen'}
           </SecondaryButton>
-          <PrimaryButton onClick={handleDownload}>
+          <PrimaryButton onClick={handleDownload} className="w-full sm:w-auto">
             <Download className="h-4 w-4" />
             Descargar PDF
           </PrimaryButton>
@@ -153,19 +153,21 @@ export const Summary = () => {
             </ul>
           </div>
         </div>
-        <div className="flex flex-wrap gap-2">
+        <div className="fixed bottom-0 left-0 right-0 z-20 flex flex-col gap-2 border-t border-gray-200 bg-white p-4 sm:static sm:z-auto sm:border-none sm:bg-transparent sm:p-0 sm:flex-row sm:flex-wrap">
           {severityLevel === 'verde' ? (
-            <PrimaryButton onClick={goToFollowUp}>
+            <PrimaryButton onClick={goToFollowUp} className="w-full sm:w-auto">
               <ExternalLink className="h-4 w-4" />
               Registrar seguimiento
             </PrimaryButton>
           ) : (
-            <SecondaryButton onClick={() => setSlotModal(true)}>
+            <SecondaryButton onClick={() => setSlotModal(true)} className="w-full sm:w-auto">
               <ExternalLink className="h-4 w-4" />
               Sugerir turno
             </SecondaryButton>
           )}
-          <SecondaryButton onClick={startNew}>Iniciar nueva preconsulta</SecondaryButton>
+          <SecondaryButton onClick={startNew} className="w-full sm:w-auto">
+            Iniciar nueva preconsulta
+          </SecondaryButton>
         </div>
       </Card>
 
@@ -188,18 +190,21 @@ export const Summary = () => {
                 <button
                   key={slot}
                   onClick={() => setSelectedSlot(slot)}
-                  className={`w-full rounded-xl border px-3 py-3 text-left text-sm transition ${
-                    selectedSlot === slot
-                      ? 'border-teal-700 bg-[#e3f1f2] text-gray-900'
-                      : 'border-gray-200 bg-white hover:border-gray-400'
-                  }`}
+                  className={`w-full rounded-xl border px-3 py-3 text-left text-sm transition ${selectedSlot === slot
+                    ? 'border-teal-700 bg-[#e3f1f2] text-gray-900'
+                    : 'border-gray-200 bg-white hover:border-gray-400'
+                    }`}
                 >
                   {slot}
                 </button>
               ))}
             </div>
             <div className="mt-4 flex justify-end">
-              <PrimaryButton onClick={() => setSlotModal(false)} disabled={!selectedSlot}>
+              <PrimaryButton
+                onClick={() => setSlotModal(false)}
+                disabled={!selectedSlot}
+                className="w-full sm:w-auto"
+              >
                 Confirmar turno simulado
               </PrimaryButton>
             </div>

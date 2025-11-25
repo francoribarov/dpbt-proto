@@ -95,18 +95,18 @@ export const Review = () => {
 
       <Card className="p-4">
         <div className="mb-3 flex items-center justify-between">
-          <div className="text-sm font-semibold text-gray-800">Adjuntos</div>
+          <div className="text-sm font-semibold">Adjuntos</div>
           <div className="text-xs text-gray-500">Se guardan solo los nombres</div>
         </div>
         <MediaList items={draft.media} />
       </Card>
 
-      <Card className="flex flex-col gap-3 rounded-2xl border border-gray-900 bg-gray-900 px-4 py-5 text-white shadow-sm sm:flex-row sm:items-center sm:justify-between">
+      <Card className="flex flex-col gap-3 rounded-2xl border border-gray-900 bg-gray-900 px-4 py-5 shadow-sm sm:flex-row sm:items-center sm:justify-between">
         <div className="flex items-center gap-3">
           <FileText className="h-5 w-5" />
           <div>
             <div className="text-sm font-semibold">Lista para enviar</div>
-            <div className="text-xs text-gray-200">
+            <div className="text-xs">
               Síntoma: {symptomLabels[draft.symptom]} · {questions.length} respuestas
             </div>
           </div>
@@ -114,7 +114,7 @@ export const Review = () => {
         <div className="flex flex-wrap gap-2">
           <button
             onClick={() => navigate('/preconsulta/preguntas')}
-            className="inline-flex min-h-[44px] items-center justify-center rounded-xl border border-white/50 bg-transparent px-4 py-2 text-sm text-white shadow-sm transition hover:bg-white/10"
+            className="inline-flex min-h-[44px] items-center justify-center rounded-xl border border-gray/50 bg-transparent px-4 py-2 text-sm shadow-sm transition hover:bg-white/10"
           >
             Editar
           </button>
@@ -122,7 +122,6 @@ export const Review = () => {
             onClick={onGenerate}
             disabled={!allAnswered || loading}
             className="text-gray-900"
-            style={{ backgroundColor: '#ffffff' }}
           >
             {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : <ArrowRight className="h-4 w-4" />}
             Generar resumen clínico

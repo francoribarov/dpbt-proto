@@ -45,7 +45,7 @@ export const History = () => {
           <div className="text-xs text-gray-500">Completá una preconsulta para ver acá.</div>
         </div>
       ) : (
-        <div className="grid gap-4 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
           <Card className="p-4 lg:col-span-1">
             <div className="mb-3 flex items-center gap-2 text-sm font-semibold text-gray-800">
               <Clock4 className="h-4 w-4" />
@@ -56,11 +56,10 @@ export const History = () => {
                 <button
                   key={item.id}
                   onClick={() => setSelected(item)}
-                  className={`w-full rounded-xl border px-3 py-3 text-left text-sm transition ${
-                    selected?.id === item.id
+                  className={`w-full rounded-xl border px-3 py-3 text-left text-sm transition ${selected?.id === item.id
                       ? 'border-teal-600 bg-[#e3f1f2]'
                       : 'border-gray-200 bg-white hover:border-gray-400'
-                  }`}
+                    }`}
                 >
                   <div className="flex items-center justify-between">
                     <div className="font-semibold">
@@ -87,12 +86,15 @@ export const History = () => {
                   {selected.summaryText ??
                     buildSummaryText(selected, { level: selected.triage ?? 'verde', reason: '' })}
                 </pre>
-                <div className="mt-3 flex items-center justify-between">
+                <div className="mt-3 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
                   <div className="text-xs text-gray-600">
                     Seguimiento: {selected.followUps.length ? `${selected.followUps.length} check-ins` : 'No creado'}
                   </div>
                   {selected.followUps.length > 0 && (
-                    <SecondaryButton onClick={() => navigate(`/seguimiento/${selected.id}`)} className="px-3 py-2 text-sm min-h-[40px]">
+                    <SecondaryButton
+                      onClick={() => navigate(`/seguimiento/${selected.id}`)}
+                      className="w-full px-3 py-2 text-sm min-h-[40px] sm:w-auto"
+                    >
                       Abrir seguimiento
                     </SecondaryButton>
                   )}

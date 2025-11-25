@@ -46,12 +46,18 @@ export const MediaUpload = () => {
         right={<SymptomPill symptom={draft.symptom} />}
       />
 
-      <div className="flex flex-wrap gap-3">
-        <SecondaryButton onClick={() => photoInputRef.current?.click()}>
+      <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+        <SecondaryButton
+          onClick={() => photoInputRef.current?.click()}
+          className="w-full sm:w-auto"
+        >
           <Camera className="h-4 w-4" />
           Agregar foto
         </SecondaryButton>
-        <SecondaryButton onClick={() => videoInputRef.current?.click()}>
+        <SecondaryButton
+          onClick={() => videoInputRef.current?.click()}
+          className="w-full sm:w-auto"
+        >
           <FileVideo className="h-4 w-4" />
           Agregar video
         </SecondaryButton>
@@ -96,12 +102,18 @@ export const MediaUpload = () => {
         </ul>
       </Card>
 
-      <div className="flex items-center justify-between gap-3">
-        <SecondaryButton onClick={() => navigate('/preconsulta/sintoma')}>
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <SecondaryButton
+          onClick={() => navigate('/preconsulta/sintoma')}
+          className="w-full sm:w-auto"
+        >
           <ChevronLeft className="h-4 w-4" />
           Atrás
         </SecondaryButton>
-        <PrimaryButton onClick={() => navigate('/preconsulta/preguntas')}>
+        <PrimaryButton
+          onClick={() => navigate('/preconsulta/preguntas')}
+          className="w-full sm:w-auto"
+        >
           Continuar
         </PrimaryButton>
       </div>

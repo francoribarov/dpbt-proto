@@ -91,11 +91,18 @@ export const Questions = () => {
       </Card>
 
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <SecondaryButton onClick={() => navigate('/preconsulta/multimedia')}>
+        <SecondaryButton
+          onClick={() => navigate('/preconsulta/multimedia')}
+          className="w-full sm:w-auto"
+        >
           <ChevronLeft className="h-4 w-4" />
           Atrás
         </SecondaryButton>
-        <PrimaryButton onClick={() => navigate('/preconsulta/revision')} disabled={!allAnswered}>
+        <PrimaryButton
+          onClick={() => navigate('/preconsulta/revision')}
+          disabled={!allAnswered}
+          className="w-full sm:w-auto"
+        >
           Continuar
         </PrimaryButton>
       </div>
