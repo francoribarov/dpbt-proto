@@ -6,6 +6,7 @@ import type {
   MediaItem,
   PreconsultaDraft,
   SymptomKey,
+  TreatmentPlan,
 } from '../types'
 import { calculateTriage } from '../lib/triage'
 import { buildSummaryText } from '../lib/summary'
@@ -19,6 +20,7 @@ import {
 } from '../lib/storage'
 import { buildRecommendations } from '../lib/recommendations'
 import { createDefaultFollowUps } from '../lib/followup'
+import { createEmptyTreatmentPlan } from '../lib/treatmentPlan'
 
 type PreconsultaContextShape = {
   draft: PreconsultaDraft
@@ -31,6 +33,7 @@ type PreconsultaContextShape = {
   finalizeSummary: () => { summary: string; level: 'verde' | 'amarillo' | 'rojo' }
   createFollowUpPlan: (entryId?: string) => FollowUpCheckIn[]
   updateFollowUp: (entryId: string, checkId: string, payload: Partial<FollowUpCheckIn>) => void
+  updateTreatmentPlan: (entryId: string, plan: TreatmentPlan) => void
   setDraft: (draft: PreconsultaDraft) => void
   clearAll: () => void
 }
@@ -71,6 +74,7 @@ export const PreconsultaProvider = ({ children }: PropsWithChildren) => {
       summaryText: null,
       recommendations: null,
       followUps: [],
+      treatmentPlan: createEmptyTreatmentPlan(),
     }))
   }
 
@@ -141,6 +145,14 @@ export const PreconsultaProvider = ({ children }: PropsWithChildren) => {
     upsertHistory(updated, true)
   }
 
+  const updateTreatmentPlan = (entryId: string, plan: TreatmentPlan) => {
+    const target = findEntryById(entryId)
+    if (!target) return
+    const updated: PreconsultaDraft = { ...target, treatmentPlan: plan }
+    if (updated.id === draft.id) setDraft(updated)
+    upsertHistory(updated, true)
+  }
+
   const clearAll = () => {
     clearAllStorage()
     setDraft(createEmptyDraft())
@@ -159,6 +171,7 @@ export const PreconsultaProvider = ({ children }: PropsWithChildren) => {
       finalizeSummary,
       createFollowUpPlan,
       updateFollowUp,
+      updateTreatmentPlan,
       setDraft,
       clearAll,
     }),

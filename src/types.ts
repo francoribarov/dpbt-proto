@@ -15,6 +15,20 @@ export type Recommendation = {
   urgente: string[]
 }
 
+export type TreatmentMedication = {
+  id: string
+  name: string
+  dose: string
+  frequency: string
+  reminder: string
+  notes: string
+}
+
+export type TreatmentPlan = {
+  medications: TreatmentMedication[]
+  notes: string
+}
+
 export type FollowUpCheckIn = {
   id: string
   scheduledAt: string
@@ -33,6 +47,7 @@ export type PreconsultaDraft = {
   summaryText: string | null
   recommendations: Recommendation | null
   followUps: FollowUpCheckIn[]
+  treatmentPlan: TreatmentPlan
 }
 
 export type SymptomOption = {

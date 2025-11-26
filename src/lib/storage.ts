@@ -1,12 +1,9 @@
 import type { PreconsultaDraft } from '../types'
+import { createEmptyTreatmentPlan } from './treatmentPlan'
+import { getId } from './ids'
 
 const DRAFT_KEY = 'preconsulta-draft'
 const HISTORY_KEY = 'preconsulta-history'
-
-const getId = () =>
-  typeof crypto !== 'undefined' && crypto.randomUUID
-    ? crypto.randomUUID()
-    : `${Date.now()}-${Math.random().toString(16).slice(2)}`
 
 export const createEmptyDraft = (): PreconsultaDraft => ({
   id: getId(),
@@ -18,6 +15,7 @@ export const createEmptyDraft = (): PreconsultaDraft => ({
   summaryText: null,
   recommendations: null,
   followUps: [],
+  treatmentPlan: createEmptyTreatmentPlan(),
 })
 
 const safeParse = <T>(value: string | null, fallback: T): T => {
@@ -34,6 +32,7 @@ const normalizeDraft = (draft: PreconsultaDraft): PreconsultaDraft => ({
   ...draft,
   recommendations: draft.recommendations ?? null,
   followUps: draft.followUps ?? [],
+  treatmentPlan: draft.treatmentPlan ?? createEmptyTreatmentPlan(),
 })
 
 export const loadDraft = (): PreconsultaDraft => {
